@@ -1,0 +1,73 @@
+#voltorb_game {
+    background-color: #28a068;
+    margin: auto;
+    height: 600px;
+    width: 800px;
+    padding: 10px;
+    font-family: sans-serif;
+}
+
+#numGrid {
+    float: left;
+    margin-bottom: 10px;
+}
+
+#numGrid tr th{
+    border: solid;
+    border-color: white;
+    border-radius: 5px;
+    height: 85px;
+    width: 85px;
+    margin: 2.5px;
+    display: inline-block;
+    color: white;
+}
+
+#scoreTab{
+    float: right;
+    width: 25%;
+}
+
+#memo{
+    height: 180px;
+    background-color: #aaa9a8;
+    font-size: 50px;
+    text-align: center;
+}
+
+#memopick{
+    height: 180px;
+    background-color: #c77351;
+    font-size: 50px;
+    text-align: center;
+}
+
+.coinCounter{
+/*    display: inline-block;*/
+    margin: auto;
+    margin-top: 10px;
+    border-style: solid;
+    border-color: #404040;
+    border-radius: 5px;
+    color: white;
+    width: 97%;
+}
+
+.Btn{
+    display: block;
+    margin: auto;
+    margin-top: 10px;
+    width: 100%;
+    height: 80px;
+    font-size: 50px;
+}
+
+.memopick_inner{
+    width: 45%;
+    height: 45%;
+    float: left;
+    line-height: 150%;
+    border-style: solid;
+    border-color: #404040;
+    margin: 1px;
+}

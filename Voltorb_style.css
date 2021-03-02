@@ -12,7 +12,8 @@
     margin-bottom: 10px;
 }
 
-#numGrid tr th{
+#numGrid tr th,
+td {
     border: solid;
     border-color: white;
     border-radius: 5px;
@@ -21,53 +22,166 @@
     margin: 2.5px;
     display: inline-block;
     color: white;
+    text-align: center;
+    font-weight: bold;
+    background-color: #188060;
 }
 
-#scoreTab{
+#numGrid tr #head1, #numGrid tr #head6{
+    background-color: #e77352;
+    color: #424242;
+}
+
+#numGrid tr #head2, #numGrid tr #head7{
+    background-color: #42ad42;
+    color: #424242;
+}
+
+#numGrid tr #head3, #numGrid tr #head8{
+    background-color: #efa539;
+    color: #424242;
+}
+
+#numGrid tr #head4, #numGrid tr #head9{
+    background-color: #3194ff;
+    color: #424242;
+}
+
+#numGrid tr #head5, #numGrid tr #head10{
+    background-color: #c663e7;
+    color: #424242;
+}
+
+.playfield {
+    font-size: 40px;
+}
+
+.voltorb {
+    display: block;
+    width: 50%;
+    height: 50%;
+    float: left;
+}
+
+.voltorb img {
+    width: 90%;
+    height: 90%;
+    margin-top: 2.5px;
+    margin-left: 2.5px;
+}
+
+.one {
+    display: block;
+    float: right;
+    width: 50%;
+    height: 50%;
+    text-align: center;
+    font-size: 35px;
+    color: #f8c019;
+}
+
+.two {
+    display: block;
+    float: left;
+    width: 50%;
+    height: 50%;
+    text-align: center;
+    font-size: 35px;
+    color: #f8c019;
+    bottom: 0;
+}
+
+.three {
+    display: block;
+    float: right;
+    width: 50%;
+    height: 50%;
+    text-align: center;
+    font-size: 35px;
+    color: #f8c019;
+    bottom: 0;
+}
+
+#scoreTab {
     float: right;
     width: 25%;
 }
 
-#memo{
-    height: 180px;
+#memo {
+    height: 175px;
     background-color: #aaa9a8;
     font-size: 50px;
     text-align: center;
+    line-height: 80px;
 }
 
-#memopick{
-    height: 180px;
+#memopick {
+    height: 175px;
     background-color: #c77351;
     font-size: 50px;
     text-align: center;
+    line-height: 80px;
 }
 
-.coinCounter{
-/*    display: inline-block;*/
+#memopick img {
+    margin-top: 10px;
+}
+
+.coinCounter {
     margin: auto;
     margin-top: 10px;
     border-style: solid;
     border-color: #404040;
     border-radius: 5px;
-    color: white;
-    width: 97%;
+    color: #424242;
+    max-width: 97%;
+    background-color: white;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-size: 20px;
+    font-weight: bold;
 }
 
-.Btn{
+.startBtn {
     display: block;
     margin: auto;
-    margin-top: 10px;
+    margin-top: 5px;
     width: 100%;
-    height: 80px;
+    height: 93px;
     font-size: 50px;
+    font-weight: bold;
+    border-style: solid;
+    border-color: #404040;
+    border-radius: 5px;
+    color: #424242;
+    background-color: #aaa9a8;
+    
 }
 
-.memopick_inner{
+.memopick_inner {
     width: 45%;
     height: 45%;
     float: left;
-    line-height: 150%;
     border-style: solid;
     border-color: #404040;
+    color: white;
     margin: 1px;
+}
+
+#lose{
+    display: none;
+}
+
+#lose img{
+    position: fixed;
+    top: 10%;  
+    right: 25%;
+    width: 500px;
+    height: 500px;}
+
+#win{
+    position: fixed;
+    top: 25%;  
+    left: 40%;
+    display: none;
 }

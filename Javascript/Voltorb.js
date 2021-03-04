@@ -4,7 +4,7 @@ $(document).ready(function () {
     let memomode = false;
     let coinTotal = 0;
     let coinGain = 0;
-    let memory;
+    let pickedMemoryNumber;
     let winCount = 0;
     let winCondition = 0;
     let field = [0, 0, 0, 0, 0,
@@ -37,7 +37,7 @@ $(document).ready(function () {
             $(this).css({
                 backgroundColor: '#188060',
                 "pointer-events": "auto"
-            }).text('');
+            }).html('<div class="voltorb"></div><div class="one"></div><div class="two"></div><div class="three"></div>');
         });
         $('#lose').css({
             display: 'none'
@@ -101,7 +101,7 @@ $(document).ready(function () {
             } else if ($('#memopick').is(':hidden')) {
                 resetMemopickSelectColor();
                 memomode = false;
-                memory = '';
+                pickedMemoryNumber = '';
             }
         }
     });
@@ -109,10 +109,10 @@ $(document).ready(function () {
     //choose memo number
     $('.memopick_inner').on('click', function () {
         if (memomode) {
-            memory = $(this).text();
+            pickedMemoryNumber = $(this).text();
             resetMemopickSelectColor();
-            if (memory.length == 0) {
-                memory = '0';
+            if (pickedMemoryNumber.length == 0) {
+                pickedMemoryNumber = '0';
                 $(this).html('<img src="Images/Voltorb_Gold.png"/>');
             }
             $(this).css({
@@ -134,44 +134,46 @@ $(document).ready(function () {
     };
 
     $('.playfield').on('click', function () {
-        //makes notes on card
+        let thisPlayfield = this;
         if (memomode && gamestart) {
-            if ($(this).text().indexOf(memory) > -1) {
-                let temp = $(this).text();
-                temp = temp.replace(memory, '');
-                $(this).text(temp);
-            } else {
-                $(this).append(memory);
-            }
-            //reveal number in card
+            enterMemoLabel(thisPlayfield);
         } else if (gamestart) {
-            let blockid = parseInt($(this).attr('id').substr(5));
-            let revealedNumber = field[blockid];
-            switch (revealedNumber) {
-                case 0:
-                    gamestart = false;
-                    coinTotal = 0;
-                    coinGain = 0;
-                    $('#lose').css({
-                        display: 'block'
-                    });
-                    break;
-                case 2:
-                    increaseScore(2);
-                    break;
-                case 3:
-                    increaseScore(3);
-                    break;
-            }
-            $(this).css("pointer-events", "none");
+            revealNumber(thisPlayfield);
+        }
+    });
+
+    function enterMemoLabel(thisPlayfield) {
+        let memoLabelClasses = [".voltorb", ".one", ".two", ".three"];
+        let memoryNumbers = ['<img src="Images/Voltorb_Gold.png"/>', '1', '2', '3']
+        if ($(thisPlayfield).children(memoLabelClasses[pickedMemoryNumber]).text().indexOf(pickedMemoryNumber) > -1 ||
+            $(thisPlayfield).children(memoLabelClasses[pickedMemoryNumber]).find('img').length) {
+            $(thisPlayfield).children(memoLabelClasses[pickedMemoryNumber]).html('');
+        } else {
+            $(thisPlayfield).children(memoLabelClasses[pickedMemoryNumber]).html(memoryNumbers[pickedMemoryNumber]);
+        }
+    }
+
+    function revealNumber(thisPlayfield) {
+        let blockid = parseInt($(thisPlayfield).attr('id').substr(5));
+        let revealedNumber = field[blockid];
+        if (revealedNumber === 0) {
+            gamestart = false;
+            coinTotal = 0;
+            coinGain = 0;
+            $('#lose').css({
+                display: 'block'
+            });
+        } else {
+            increaseScore(revealedNumber);
+            $(thisPlayfield).css("pointer-events", "none");
             // change background color to lighter color
-            $(this).css({
+            $(thisPlayfield).css({
                 backgroundColor: '#bd8c84',
                 'line-height': '80px'
             }).text(field[blockid])
             checkWin();
         }
-    });
+    }
 
     function increaseScore(multiplier) {
         coinGain = coinGain * multiplier;

@@ -13,7 +13,7 @@ $(document).ready(function () {
                  0, 0, 0, 0, 0,
                  0, 0, 0, 0, 0];
 
-    //function to start the game an make clicking on elements possible
+    //function to start the game and make clicking on elements possible
     $('#startbtn').on('click', function () {
         coinGain = 1;
         generateArray();
@@ -166,7 +166,7 @@ $(document).ready(function () {
         } else {
             increaseScore(revealedNumber);
             $(thisPlayfield).css("pointer-events", "none");
-            // change background color to lighter color
+            // change background color
             $(thisPlayfield).css({
                 backgroundColor: '#bd8c84',
                 'line-height': '80px'
@@ -177,7 +177,9 @@ $(document).ready(function () {
 
     function increaseScore(multiplier) {
         coinGain = coinGain * multiplier;
-        winCount++;
+        if (multiplier > 1){
+            winCount++;
+        }
     };
 
     function checkWin() {
@@ -185,13 +187,13 @@ $(document).ready(function () {
             gamestart = false;
             coinTotal = coinTotal + coinGain;
             coinGain = 0;
-            //update total coin field
+            //Update Total Coins field
             $('#TotalCoins').text('Your Coins: ' + coinTotal);
             $('#win').css({
                 display: 'block'
             });
         }
-        //update collected coin field
+        //Update Earned Coins field
         $('#RoundCoins').text('Earned Coins: ' + coinGain);
     };
 });

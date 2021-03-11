@@ -7,12 +7,9 @@ $(document).ready(function () {
     let pickedMemoryNumber;
     let winCount = 0;
     let winCondition = 0;
-    let field = [0, 0, 0, 0, 0,
-                 0, 0, 0, 0, 0,
-                 0, 0, 0, 0, 0,
-                 0, 0, 0, 0, 0,
-                 0, 0, 0, 0, 0];
-
+    let level = 1;
+    let field = [];
+    
     //function to start the game and make clicking on elements possible
     $('#startbtn').on('click', function () {
         coinGain = 1;
@@ -23,11 +20,37 @@ $(document).ready(function () {
     });
 
     function generateArray() {
-        for (let i = 0; i < field.length; i++) {
-            field[i] = Math.floor((Math.random() * 4));
-            // count al squares with a vallue higher than 1
-            if (field[i] > 1) {
-                winCondition++;
+        winCondition = 0;
+        field = [1, 1, 1, 1, 1,
+                 1, 1, 1, 1, 1,
+                 1, 1, 1, 1, 1,
+                 1, 1, 1, 1, 1,
+                 1, 1, 1, 1, 1];
+        let passedLocations = [];
+        let voltorbAmount;
+        if (level < 5){
+            voltorbAmount = 6 + (level - 1);
+        } else{
+            voltorbAmount = 10;
+        }
+        let twoAmount = 4;
+        let threeAmount = 1;
+        arrayLoop(0, voltorbAmount, passedLocations);
+        arrayLoop(2, twoAmount + (level - 1), passedLocations);
+        arrayLoop(3, threeAmount + (level - 1), passedLocations);
+    };
+
+    function arrayLoop(fillNumber, amount, passedLocations) {
+        for (let i = 0; i < amount; i++) {
+            let index = Math.floor((Math.random() * 25));
+            if (passedLocations.includes(index)) {
+                i--;
+            } else {
+                field[index] = fillNumber;
+                passedLocations.push(index);
+                if (fillNumber > 1) {
+                    winCondition++;
+                }
             }
         }
     };
@@ -177,7 +200,7 @@ $(document).ready(function () {
 
     function increaseScore(multiplier) {
         coinGain = coinGain * multiplier;
-        if (multiplier > 1){
+        if (multiplier > 1) {
             winCount++;
         }
     };
@@ -187,6 +210,9 @@ $(document).ready(function () {
             gamestart = false;
             coinTotal = coinTotal + coinGain;
             coinGain = 0;
+            if(level < 6){
+                level++;
+            }
             //Update Total Coins field
             $('#TotalCoins').text('Your Coins: ' + coinTotal);
             $('#win').css({
